@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import Card from "./Card";
+import React, { useState, useEffect } from "react";
+import "./index.css";
 
-function App() {
+export default function App() {
+
+  let randomId = getRandomInt(40)
+  const [wish, setWish] = useState ('hi')
+
+  useEffect(() => {
+    fetch("https://retoolapi.dev/FMGixB/birthdaywishes")
+      .then((response) => response.json())
+      .then((data) => {
+        setWish(data[randomId].message);
+      });
+  }, []);
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Card wish={wish}/>
     </div>
   );
 }
-
-export default App;

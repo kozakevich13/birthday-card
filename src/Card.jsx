@@ -1,7 +1,6 @@
 import "./index.css"
 
 export default function Card(wish) {
-    console.log(wish.wish)
   return (
     <div className="birthdayCard">
         <div className="cardFront">
